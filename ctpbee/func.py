@@ -285,9 +285,18 @@ class RLock:
 
 def get_ctpbee_path():
     """ 获取ctpbee的路径默认路径 """
+    import platform
     import os
-    home_path = os.environ['HOME']
+    system_ = platform.system()
+    if system_ == 'Linux':
+        home_path = os.environ['HOME']
+    elif system_ == 'Windows':
+        home_path = os.environ['HOMEDRIVE'] + os.environ['HOMEPATH']
+    elif system_ == "Darwin":
+        home_path = os.environ['HOME']
+    else:
+        raise Exception("bee does not know the system!")
     ctpbee_path = os.path.join(home_path, ".ctpbee")
-    if not os.path.isdir(ctpbee_path):
+    if not os.path.exists(ctpbee_path):
         os.mkdir(ctpbee_path)
     return ctpbee_path
