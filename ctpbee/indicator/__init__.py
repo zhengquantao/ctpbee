@@ -5,3 +5,4 @@
     TA-lib库提供的指标
 """
 from .ta_lib import ArrayManager
+from .interface import IndicatorManager
